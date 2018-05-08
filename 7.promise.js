@@ -60,7 +60,15 @@ someAsyncThing().then(function() {
 // oh no [ReferenceError: x is not defined]
 // carry on [ReferenceError: y is not defined]
 
-5.Promise.all() Promise.all 方法用于将多个Promise实例，包装成一个新的Promise实例 所有状态改变，才会触发回调
+5.Promise.prototype.finally() 用于指定不管 Promise 对象最后状态如何，都会执行的操作；ES2018;
+finally方法里面的操作，应该是与状态无关的，不依赖于 Promise 的执行结果
+finally本质上是then方法的特例
+promise
+.then(result => {···})
+.catch(error => {···})
+.finally(() => {···});
+
+6.Promise.all() Promise.all 方法用于将多个Promise实例，包装成一个新的Promise实例 所有状态改变，才会触发回调
 提醒：Promise.all 方法的参数可以不是数组，但必须具有Iterator接口，且返回的每个成员都是Promise实例
 //示例一：
 // 生成一个Promise对象的数组
@@ -89,7 +97,7 @@ Promise.all([
 ])
 .then(([books, user]) => pickTopRecommentations(books, user));
 
-6.Promise.race() Promise.race方法同样是将多个Promise实例，包装成一个新的Promise实例 其中一个状态改变，才会触发回调
+7.Promise.race() Promise.race方法同样是将多个Promise实例，包装成一个新的Promise实例 其中一个状态改变，才会触发回调
 //示例一：
 const p = Promise.race([
   fetch('/resource-that-may-take-a-while'),
